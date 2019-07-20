@@ -14,6 +14,7 @@ public class Document {
 
     private String name;
 
+    @SuppressWarnings("unused")
     private Document() {
         // Empty constructor required as of Neo4j API 2.0.5
     };
@@ -25,7 +26,7 @@ public class Document {
     @Relationship(type = "parent")
     private Document parent;
 
-    @Relationship(type = "children", direction = Relationship.OUTGOING)
+    @Relationship(type = "children")
     public Set<Document> children = new HashSet<>();
 
     public void addChild(Document document) {
