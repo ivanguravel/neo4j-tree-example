@@ -1,18 +1,16 @@
 package com.ivzh.neo4j.example.tree.domain;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-
 import java.util.HashSet;
 import java.util.Set;
 
-@NodeEntity
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+@NodeEntity(label = "Document")
 public class Document {
 
-    @Id
-    @GeneratedValue
+    @GraphId
     private Long id;
 
     private String name;
@@ -28,7 +26,7 @@ public class Document {
     @Relationship(type = "parent")
     private Document parent;
 
-    @Relationship(type = "children")
+    @Relationship(type = "children", direction = Relationship.OUTGOING)
     public Set<Document> children = new HashSet<>();
 
     public void addChild(Document document) {

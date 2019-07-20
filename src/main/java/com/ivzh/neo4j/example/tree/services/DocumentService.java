@@ -25,30 +25,32 @@ public class DocumentService {
 		return DocumentDtoConverter.convert(document);
 	}
 
-    @Transactional(readOnly = true)
+	@Transactional(readOnly = true)
     public Document findById(Long id) {
 		Optional<Document> byId = repository.findById(id);
 		Document result = byId
 				.orElseThrow(() -> new IllegalArgumentException(String.format("can't find document by id %s", id)));
-		System.out.println(result.getChildren().size());
+		
 		return result;
     }
 
-	@Transactional
+    @Transactional
     public DocumentDto save(Long parentId, String name) {
 		DocumentDto dto = new DocumentDto();
 		dto.setName(name);
 
 		Document forSave = new Document(name);
+		
 		if (parentId != null) {
+			// findById without additional transaction because of aspect work
 			Document document = findById(parentId);
 			forSave.setParent(document);
 			document.addChild(forSave);
-			dto.setId(repository.save(forSave).getId());
 			repository.save(document);
-		} else {
-			dto.setId(repository.save(forSave).getId());
 		}
+		
+		dto.setId(repository.save(forSave).getId());
+		
 		return dto;
 	}
 }

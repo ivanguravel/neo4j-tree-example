@@ -1,16 +1,10 @@
 ### How to run
 
-1) Download, install, and start Neo4j Desktop.
+1) `docker run --publish=7474:7474 --publish=7687:7687 --env NEO4J_AUTH=neo4j/secret neo4j:3.1.2`
 
-From here, there are two ways you can access the end points.
-1) Open the browser web interface at http://localhost:7474
+2) Clone this project from GitHub
 
-Configure a username and password, if you haven’t already.
+3) `cd neo4j-tree-example && mvn spring-boot:run`
 
-2) In Neo4j Desktop, click on your project, click on Manage on the database you are using, click Open Browser.
 
-Should not need to log in. Password was set up when you set up the database.
-
-Clone this project from GitHub
-
-Run that with your login and pwd and try to use
+This project is based on: https://github.com/neo4j/neo4j-ogm/blob/master/neo4j-ogm-tests/neo4j-ogm-integration-tests/src/test/java/org/neo4j/ogm/persistence/examples/tree/TreeIntegrationTest.java
