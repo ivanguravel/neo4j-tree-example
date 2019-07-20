@@ -10,6 +10,8 @@ import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 @SpringBootApplication
 @EnableNeo4jRepositories("com.ivzh.neo4j.example.tree.repositories")
 public class Application {
+	
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

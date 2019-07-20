@@ -28,7 +28,7 @@ public class Document {
     @Relationship(type = "parent")
     private Document parent;
 
-    @Relationship(type = "children", direction = Relationship.INCOMING)
+    @Relationship(type = "children")
     public Set<Document> children = new HashSet<>();
 
     public void addChild(Document document) {

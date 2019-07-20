@@ -30,6 +30,7 @@ public class DocumentService {
 		Optional<Document> byId = repository.findById(id);
 		Document result = byId
 				.orElseThrow(() -> new IllegalArgumentException(String.format("can't find document by id %s", id)));
+		System.out.println(result.getChildren().size());
 		return result;
     }
 
@@ -43,13 +44,8 @@ public class DocumentService {
 			Document document = findById(parentId);
 			forSave.setParent(document);
 			document.addChild(forSave);
-			dto.setId(repository.save(document)
-					.getChildren()
-					.parallelStream()
-					.filter(d -> name.equalsIgnoreCase(d.getName()))
-					.findFirst()
-					.get()
-					.getId());
+			dto.setId(repository.save(forSave).getId());
+			repository.save(document);
 		} else {
 			dto.setId(repository.save(forSave).getId());
 		}
