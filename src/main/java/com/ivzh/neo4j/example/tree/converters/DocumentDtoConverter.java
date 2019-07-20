@@ -17,7 +17,7 @@ public class DocumentDtoConverter {
         return dto;
     }
 
-    public static DocumentDto from(Document document) {
+    private static DocumentDto from(Document document) {
         DocumentDto dto  = new DocumentDto();
 
         dto.setId(document.getId());
